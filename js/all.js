@@ -53,15 +53,16 @@ function arrowSlider(){
       // Вешаю на них событие
       item.addEventListener("click", function() {
         let currentImage = wrapperImages.querySelector('.active');
-        let prevImage = currentImage.previousElementSibling;
-        let nextImage = currentImage.nextElementSibling;
+        // Можно использовать логическое ИЛИ для задания "запасного" значения prevImage и nextImage, в случае если эти элементы равны null, и за счёт этого упростить код ниже
+        let prevImage = currentImage.previousElementSibling || wrapperImages.lastElementChild;
+        let nextImage = currentImage.nextElementSibling || wrapperImages.firstElementChild;
         
         currentImage.classList.remove('active');
         
         if (item.classList.contains('prev')){
-          prevImage === null ? wrapperImages.lastElementChild.classList.add('active') : prevImage.classList.add('active');
+          prevImage.classList.add('active');
         } else {
-          nextImage === null ? wrapperImages.firstElementChild.classList.add('active') : nextImage.classList.add('active');
+          nextImage.classList.add('active');
         }
       });
   });
